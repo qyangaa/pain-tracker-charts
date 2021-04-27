@@ -8,13 +8,13 @@ export default function useData({
   initialData = [],
 }) {
   const [data, setData] = useState(initialData);
-  const [curArgumenmts, setCurArgumenmts] = useState(initialArguments);
+  const [curArguments, setCurArguments] = useState(initialArguments);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(async () => {
     setIsLoading(true);
     try {
-      let curData = await request(curArgumenmts);
+      let curData = await request(curArguments);
       for (let series of curData.seriesData) {
         for (let d of series.data) {
           dataTransform(d);
@@ -25,11 +25,11 @@ export default function useData({
     } catch (error) {
       console.log(error);
     }
-  }, [curArgumenmts]);
+  }, [curArguments]);
 
   const setArguments = (newArguments) => {
-    setCurArgumenmts(newArguments);
+    setCurArguments({ ...curArguments, ...newArguments });
   };
 
-  return [data, setArguments, isLoading];
+  return [data, curArguments, setArguments, isLoading];
 }

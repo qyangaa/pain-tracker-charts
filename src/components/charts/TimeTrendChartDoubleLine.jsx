@@ -15,16 +15,29 @@ import AxisBottom from "../shapes/AxisBottom";
 
 const style = {
   margin: { top: 0.1, bottom: 0.1, left: 0.05, right: 0.05 },
-  mark: {
+  mark1: {
     path: {
-      stroke: "#137B80",
+      stroke: "#9ACFDD",
       strokeWidth: 5,
       strokeLinejoin: "round",
       strokeLinecap: "round",
     },
 
     circle: {
-      fill: "#137B8099",
+      fill: "#9ACFDD99",
+      circleRadius: 9,
+    },
+  },
+  mark2: {
+    path: {
+      stroke: "#6b8f67",
+      strokeWidth: 5,
+      strokeLinejoin: "round",
+      strokeLinecap: "round",
+    },
+
+    circle: {
+      fill: "#6b8f6799",
       circleRadius: 9,
     },
   },
@@ -50,13 +63,17 @@ const style = {
     fill: "#635F5D",
   },
   tooltipStyle: {
-    fontSize: "1em",
+    fontSize: "2em",
+    fontWeight: "bold",
+    fill: "#FFF",
+    fontFamily: "Indie Flower",
   },
 };
 
 const xtickFormat = timeFormat("%-m/%-d");
+const yFormat = (y) => y.toFixed(1);
 
-export default function TimeTrendChart({ data }) {
+export default function TimeTrendChart({ data1, data2 }) {
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
   const [margin, setMargin] = useState({
@@ -90,25 +107,58 @@ export default function TimeTrendChart({ data }) {
     setHeight(_height);
   }, [containerRef, containerRef.current]);
 
-  const series = data.seriesData[0];
-  const lineData = series.data;
+  const series1 = data1.seriesData[0];
+  const lineData1 = series1.data;
+  const series2 = data2.seriesData[0];
+  const lineData2 = series2.data;
 
   const xScale = useMemo(
     () =>
       scaleTime()
-        .domain(extent(lineData, (d) => d.x))
+        .domain(extent(lineData1, (d) => d.x))
         .range([0, width]),
-    [lineData, width]
+    [lineData1, width]
   );
-  const yScale = useMemo(
+  const yScale1 = useMemo(
     () =>
       scaleLinear()
-        .domain(extent(lineData, (d) => d.y))
+        .domain(extent(lineData1, (d) => d.y))
         .range([height, 0])
         .nice(),
-    [lineData, height]
+    [lineData1, height]
+  );
+  const yScale2 = useMemo(
+    () =>
+      scaleLinear()
+        .domain(extent(lineData2, (d) => d.y))
+        .range([height, 0])
+        .nice(),
+    [lineData2, height]
   );
 
+  const renderSeries = (data, xScale, style, tooltipStyle) => {
+    const series = data.seriesData[0];
+    const lineData = series.data;
+    const yScale = scaleLinear()
+      .domain(extent(lineData, (d) => d.y))
+      .range([height, 0])
+      .nice();
+    return (
+      <LineMarks
+        data={lineData}
+        xScale={xScale}
+        yScale={yScale}
+        xAccessor={(d) => d.x}
+        yAccessor={(d) => d.y}
+        style={style}
+        tootipFormat={yFormat}
+        tooltipStyle={tooltipStyle}
+        displayCircle
+      />
+    );
+  };
+
+  // console.log(lineData2);
   return (
     <>
       <div
@@ -121,7 +171,7 @@ export default function TimeTrendChart({ data }) {
         }}
         ref={containerRef}
       >
-        {lineData.length ? (
+        {lineData1.length ? (
           <svg width={containerWidth} height={containerHeight}>
             <g transform={`translate(${margin.left}, ${margin.top})`}>
               <AxisBottom
@@ -133,13 +183,24 @@ export default function TimeTrendChart({ data }) {
                 grid
               />
               <LineMarks
-                data={lineData}
+                data={lineData1}
                 xScale={xScale}
-                yScale={yScale}
+                yScale={yScale1}
                 xAccessor={(d) => d.x}
                 yAccessor={(d) => d.y}
-                style={style.mark}
-                tootipFormat={xtickFormat}
+                style={style.mark1}
+                tootipFormat={yFormat}
+                tooltipStyle={style.tooltipStyle}
+                displayCircle
+              />
+              <LineMarks
+                data={lineData2}
+                xScale={xScale}
+                yScale={yScale2}
+                xAccessor={(d) => d.x}
+                yAccessor={(d) => d.y}
+                style={style.mark2}
+                tootipFormat={yFormat}
                 tooltipStyle={style.tooltipStyle}
                 displayCircle
               />

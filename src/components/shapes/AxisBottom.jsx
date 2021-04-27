@@ -7,7 +7,7 @@ export default function AxisBottom({
   tickFormat,
   grid,
 }) {
-  return xScale.ticks().map((tickValue) => (
+  return xScale.ticks(4).map((tickValue, idx) => (
     <g key={tickValue} transform={`translate(${xScale(tickValue)}, 0)`}>
       {grid && (
         <line y1={0} y2={height} stroke="black" stroke={style.lineStroke} />

@@ -7,7 +7,7 @@ import {
 } from "../graphql/requests";
 import useData from "../hooks/useData";
 
-import TimeTrendChartDoubleLine from "./charts/TimeTrendChartDoubleLine";
+import TimeTrendChartMultiLines from "./charts/TimeTrendChartMultiLines";
 
 export default function Report({ match }) {
   useEffect(() => {
@@ -55,10 +55,7 @@ export default function Report({ match }) {
       {!isPainDayLoading && !isDailyTotalLoading ? (
         <>
           <h1>{painDayData.title}</h1>
-          <TimeTrendChartDoubleLine
-            data1={painDayData}
-            data2={dailyTotalData}
-          />
+          <TimeTrendChartMultiLines dataSet={[painDayData, dailyTotalData]} />
           <div className="timeSpanButtons">
             <button onClick={() => setMonths("0.25")}>1W</button>
             <button onClick={() => setMonths("1")}>1M</button>

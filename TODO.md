@@ -1,0 +1,3 @@
+- Color legend
+- change to multiline
+- line adder

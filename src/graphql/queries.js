@@ -7,6 +7,10 @@ export const getPainDayData = gql`
       seriesData {
         xlabel
         ylabel
+        xmin
+        xmax
+        ymin
+        ymax
         data {
           x
           y
@@ -33,6 +37,10 @@ export const getDailyTotal = gql`
       seriesData {
         xlabel
         ylabel
+        xmin
+        xmax
+        ymin
+        ymax
         data {
           x
           y

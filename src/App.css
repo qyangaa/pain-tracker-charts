@@ -6,6 +6,38 @@ text {
   font-family: "Indie Flower", sans-serif;
 }
 
+button {
+  background-color: rgb(106, 112, 107);
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  color: #fff;
+  font-size: 1.5em;
+  font-family: "Indie Flower", sans-serif;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal button {
+  width: auto;
+  border-radius: 1em;
+  height: 2em;
+  font-size: 2em;
+  padding: 5px 20px;
+  text-align: center;
+}
+
 .timeSpanButtons {
   bottom: 5%;
   position: absolute;
@@ -22,7 +54,7 @@ text {
   height: 40px;
   border: none;
   color: #fff;
-  font-size: 15px;
+  font-size: 1.3em;
 }
 
 .timeSpanButtons button.active {
@@ -34,7 +66,7 @@ text {
   width: 50px;
   height: 50px;
   color: rgb(106, 112, 107);
-  font-size: 18px;
+  font-size: 1.8em;
 }
 
 .topic-selector {
@@ -66,4 +98,23 @@ text {
   color: rgb(86, 116, 121);
   border: none;
   background-color: transparent;
+}
+
+.contribution-selector {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(89, 165, 165);
+  font-size: 35px;
+}
+
+.contribution-selector button {
+  background-color: rgb(89, 165, 165);
+  width: 40%;
+  height: 80px;
+  line-height: 1.1;
+  margin: 0px 20px;
+  font-size: 30px;
 }

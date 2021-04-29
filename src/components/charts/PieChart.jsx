@@ -74,7 +74,7 @@ export default function PieChart({ data, title }) {
         setMessage(null);
         clearInterval(interval);
       }
-    }, 1500);
+    }, 500);
     return () => {
       clearInterval(interval);
     };
@@ -103,7 +103,7 @@ export default function PieChart({ data, title }) {
             >
               <text
                 fill={colors[activeIdx]}
-                y={-containerHeight / 2.3}
+                y={-containerHeight / 2.7}
                 style={{ fontSize: 45, textAnchor: "middle" }}
               >
                 {message}
@@ -115,6 +115,7 @@ export default function PieChart({ data, title }) {
                     color={colors[idx]}
                     value={d}
                     idx={idx}
+                    key={idx}
                     createArc={createArc}
                     activeIdx={activeIdx}
                     setActiveIdx={setActiveIdx}

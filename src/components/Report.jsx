@@ -12,12 +12,13 @@ export default function Report({ match }) {
     },
     { name: "Contribution", render: <h1>Contribution</h1> },
     { name: "Count", render: <h1>Count</h1> },
+    { name: "What else?", render: <h1>What else?</h1> },
   ];
 
   useEffect(() => {
     setToken(match.params.token);
   }, []);
-  console.log(topicIdx);
+  console.log(months);
 
   return (
     <>

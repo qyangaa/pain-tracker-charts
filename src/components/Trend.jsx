@@ -37,8 +37,8 @@ export default function Trend({ months, setMonths }) {
   });
 
   useEffect(() => {
-    setPainDayArguments({ months });
-    setDailyTotalArguments({ months });
+    setPainDayArguments({ numMonths: months });
+    setDailyTotalArguments({ numMonths: months });
   }, [months]);
 
   return (

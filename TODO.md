@@ -1,4 +1,3 @@
 - line adder
-- topic selector
 - pie plot
 - add unit to line data

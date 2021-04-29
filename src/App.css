@@ -1,6 +1,10 @@
 chart-container {
   margin: 0px;
 }
+h1,
+text {
+  font-family: "Indie Flower", sans-serif;
+}
 
 .timeSpanButtons {
   bottom: 5%;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { setToken } from "../graphql/requests";
 import Trend from "./Trend";
+import Contribution from "./Contribution";
 
 export default function Report({ match }) {
   const [topicIdx, setTopicIdx] = useState(0);
@@ -10,7 +11,10 @@ export default function Report({ match }) {
       name: "Trend",
       render: <Trend months={months} setMonths={setMonths} />,
     },
-    { name: "Contribution", render: <h1>Contribution</h1> },
+    {
+      name: "Contribution",
+      render: <Contribution months={months} setMonths={setMonths} />,
+    },
     { name: "Count", render: <h1>Count</h1> },
     { name: "What else?", render: <h1>What else?</h1> },
   ];
@@ -18,7 +22,6 @@ export default function Report({ match }) {
   useEffect(() => {
     setToken(match.params.token);
   }, []);
-  console.log(months);
 
   return (
     <>

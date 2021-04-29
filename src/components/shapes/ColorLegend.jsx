@@ -1,50 +1,46 @@
 import React from "react";
 
 export default function ColorLegend({
-  cScale,
+  legends,
   width,
-  label,
-  height,
-  onHover = () => {},
-  hoveredValue,
+  onClick = () => {},
+  clickedSeries,
   style = {
-    top: 30,
+    right: 0.5,
+    top: 0,
     tickSpacing: 25,
     tickSize: 7,
     tickTextOffset: 15,
     fadeOpacity: 0.2,
+    text: { fontSize: 20, fontFamily: "Indie Flower" },
   },
 }) {
   return (
     <>
-      <text
-        dx={width + 30}
-        dy={style.top}
-        style={{ ...style.label, cursor: "default" }}
-      >
-        {label}
-      </text>
-      {cScale.domain().map((domainValue, idx) => (
+      {legends.map((legend, idx) => (
         <g
           key={idx}
-          transform={`translate(${width + 30}, ${
-            style.top + (idx + 1) * style.tickSpacing
+          transform={`translate(${width * (1 - style.right)}, ${
+            -style.top - (idx + 1) * style.tickSpacing
           })`}
-          onMouseEnter={() => onHover(domainValue)}
-          onMouseOut={() => onHover(null)}
+          onMouseDown={() => {
+            legend.text === clickedSeries
+              ? onClick(null)
+              : onClick(legend.text);
+          }}
           opacity={
-            !hoveredValue || domainValue === hoveredValue
+            !clickedSeries || legend.text === clickedSeries
               ? 1
               : style.fadeOpacity
           }
         >
-          <circle fill={cScale(domainValue)} r={style.tickSize} />
+          <circle fill={legend.color} r={style.tickSize} />
           <text
             dx={style.tickTextOffset}
             dy="0.32em"
             style={{ ...style.text, cursor: "default" }}
           >
-            {domainValue}
+            {legend.text}
           </text>
         </g>
       ))}

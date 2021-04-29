@@ -15,10 +15,11 @@ export default function LineMarks({
   tooltipStyle,
   tootipFormat,
   displayCircle,
+  active,
 }) {
   const spacing = Math.ceil(data.length / numCircles);
   return (
-    <g>
+    <g opacity={active ? 1 : 0.2}>
       <path
         fill="none"
         stroke="black"
@@ -39,6 +40,7 @@ export default function LineMarks({
                 tooltipStyle={tooltipStyle}
                 tootipFormat={tootipFormat}
                 key={idx}
+                clickable={active}
               />
             )
         )}

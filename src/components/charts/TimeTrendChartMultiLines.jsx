@@ -12,12 +12,13 @@ import {
 import LineMarks from "../shapes/LineMarks";
 import AxisLeft from "../shapes/AxisLeft";
 import AxisBottom from "../shapes/AxisBottom";
+import ColorLegend from "../shapes/ColorLegend";
 import _ from "lodash";
 
 const colors = ["#9ACFDD", "#6b8f67", "#F28A80", "#F2ADA7", "#D9BACE"];
 
 const style = {
-  margin: { top: 0.1, bottom: 0.1, left: 0.05, right: 0.05 },
+  margin: { top: 0.2, bottom: 0.1, left: 0.05, right: 0.05 },
   mark: {
     path: {
       stroke: "#9ACFDD",
@@ -64,6 +65,7 @@ const xtickFormat = timeFormat("%-m/%-d");
 const yFormat = (y) => y.toFixed(1);
 
 export default function TimeTrendChart({ dataSet }) {
+  const [clickedSeries, setClickedSeries] = useState(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
   const [margin, setMargin] = useState({
@@ -111,8 +113,7 @@ export default function TimeTrendChart({ dataSet }) {
       .range([0, width]);
   }, [dataSet, width]);
 
-  const renderSeries = (data, xScale, color, idx) => {
-    const series = data.seriesData[0];
+  const renderSeries = (series, xScale, color, idx) => {
     const lineData = series.data;
     const yScale = scaleLinear()
       .domain(extent(lineData, (d) => d.y))
@@ -136,13 +137,43 @@ export default function TimeTrendChart({ dataSet }) {
         tooltipStyle={tooltipStyle}
         displayCircle
         key={idx}
+        active={!clickedSeries || clickedSeries == series.ylabel}
       />
     );
   };
 
   const renderAllLines = () => {
-    return dataSet.map((data, idx) =>
-      renderSeries(data, xScale, colors[idx], idx)
+    let curIdx = 0;
+    const lines = [];
+    const legends = [];
+    for (let data of dataSet) {
+      for (let series of data.seriesData) {
+        if (series.data.length === 0) continue;
+        lines.push(renderSeries(series, xScale, colors[curIdx], curIdx));
+        legends.push({ color: colors[curIdx], text: series.ylabel });
+        curIdx++;
+      }
+    }
+    // console.log({ lines });
+    if (lines.length === 0) {
+      console.log("here");
+      return (
+        <text style={{ fontSize: 30, fontFamily: "Indie Flower" }}>
+          No data available
+        </text>
+      );
+    }
+
+    return (
+      <>
+        {lines}{" "}
+        <ColorLegend
+          legends={legends}
+          width={width}
+          clickedSeries={clickedSeries}
+          onClick={setClickedSeries}
+        />
+      </>
     );
   };
 

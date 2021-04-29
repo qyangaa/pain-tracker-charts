@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-export default function Circle({ x, y, style, tooltipStyle, tootipFormat }) {
+export default function Circle({
+  x,
+  y,
+  style,
+  tooltipStyle,
+  tootipFormat,
+  clickable,
+}) {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -39,7 +46,9 @@ export default function Circle({ x, y, style, tooltipStyle, tootipFormat }) {
         cy={y}
         r={style.circleRadius * 2}
         style={{ fill: "transparent" }}
-        onClick={() => setIsActive(!isActive)}
+        onClick={() => {
+          clickable && setIsActive(!isActive);
+        }}
       />
     </>
   );

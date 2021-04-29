@@ -52,9 +52,11 @@ export default function Report({ match }) {
 
   return (
     <>
+      <div className="topic-selector">
+        <h1 style={{ fontFamily: "Indie Flower" }}>Topic selector Holder</h1>
+      </div>
       {!isPainDayLoading && !isDailyTotalLoading ? (
         <>
-          <h1>{painDayData.title}</h1>
           <TimeTrendChartMultiLines dataSet={[painDayData, dailyTotalData]} />
           <div className="timeSpanButtons">
             <button onClick={() => setMonths("0.25")}>1W</button>

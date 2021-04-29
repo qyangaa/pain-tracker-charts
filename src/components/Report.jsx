@@ -3,6 +3,14 @@ import { setToken } from "../graphql/requests";
 import Trend from "./Trend";
 import Contribution from "./Contribution";
 
+const monthsSelections = [
+  { name: "1W", month: "0.25" },
+  { name: "1M", month: "1" },
+  { name: "3M", month: "3" },
+  { name: "6M", month: "6" },
+  { name: "1Y", month: "12" },
+];
+
 export default function Report({ match }) {
   const [topicIdx, setTopicIdx] = useState(0);
   const [months, setMonths] = useState("3");
@@ -40,11 +48,15 @@ export default function Report({ match }) {
       </div>
       {topics[topicIdx].render}
       <div className="timeSpanButtons">
-        <button onClick={() => setMonths("0.25")}>1W</button>
-        <button onClick={() => setMonths("1")}>1M</button>
-        <button onClick={() => setMonths("3")}>3M</button>
-        <button onClick={() => setMonths("6")}>6M</button>
-        <button onClick={() => setMonths("12")}>1Y</button>
+        {monthsSelections.map((m, i) => (
+          <button
+            className={months === m.month ? "active" : ""}
+            key={i}
+            onClick={() => setMonths(m.month)}
+          >
+            {m.name}
+          </button>
+        ))}
       </div>
     </>
   );

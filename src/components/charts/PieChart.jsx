@@ -65,9 +65,7 @@ export default function PieChart({ data, title }) {
     let curIdx = 0;
     setMessage("Top contributor: ");
     setActiveIdx(maxIdxs[curIdx]);
-    console.log(maxIdxs);
     let interval = setInterval(() => {
-      console.log(curIdx);
       if (curIdx < maxIdxs.length - 1) {
         curIdx += 1;
         setActiveIdx(maxIdxs[curIdx]);
@@ -77,6 +75,9 @@ export default function PieChart({ data, title }) {
         clearInterval(interval);
       }
     }, 1500);
+    return () => {
+      clearInterval(interval);
+    };
   }, [data]);
 
   return (

@@ -12,6 +12,7 @@ text {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .timeSpanButtons button {
@@ -24,15 +25,16 @@ text {
   font-size: 15px;
 }
 
-.timeSpanButtons button .active {
+.timeSpanButtons button.active {
   border-color: rgb(106, 112, 107);
-  background-color: #fff;
-  border-radius: 20px;
-  width: 40px;
-  height: 40px;
-  border: none;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 25px;
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
   color: rgb(106, 112, 107);
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .topic-selector {

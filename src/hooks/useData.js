@@ -22,7 +22,6 @@ export default function useData({
       }
       setData(curData);
       setIsLoading(false);
-      console.log("cleared loading");
     } catch (error) {
       console.log(error);
     }

@@ -27,3 +27,34 @@ chart-container {
   color: rgb(106, 112, 107);
   font-size: 15px;
 }
+
+.topic-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 20px 0px 20px;
+  padding: 0px 10px;
+  height: 5%;
+  border-radius: 20px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgb(194, 215, 218);
+  color: rgb(86, 116, 121);
+}
+
+.topic-selector .topic-text {
+  font-family: "Indie Flower", sans-serif;
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.topic-selector button {
+  font-family: "Indie Flower", sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  color: rgb(86, 116, 121);
+  border: none;
+  background-color: transparent;
+}

@@ -1,3 +1,3 @@
-- Color legend
-- change to multiline
 - line adder
+- topic selector
+- pie plot

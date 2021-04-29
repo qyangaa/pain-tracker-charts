@@ -1,74 +1,47 @@
 import React, { useEffect, useState } from "react";
-import {
-  getPainDayData,
-  getDailyTotal,
-  getContribution,
-  setToken,
-} from "../graphql/requests";
-import useData from "../hooks/useData";
-
-import TimeTrendChartMultiLines from "./charts/TimeTrendChartMultiLines";
+import { setToken } from "../graphql/requests";
+import Trend from "./Trend";
 
 export default function Report({ match }) {
+  const [topicIdx, setTopicIdx] = useState(0);
+  const [months, setMonths] = useState("3");
+  const topics = [
+    {
+      name: "Trend",
+      render: <Trend months={months} setMonths={setMonths} />,
+    },
+    { name: "Contribution", render: <h1>Contribution</h1> },
+    { name: "Count", render: <h1>Count</h1> },
+  ];
+
   useEffect(() => {
     setToken(match.params.token);
   }, []);
-
-  const [
-    painDayData,
-    painDayArguments,
-    setPainDayArguments,
-    isPainDayLoading,
-  ] = useData({
-    request: getPainDayData,
-    initialArguments: { numMonths: "3" },
-    dataTransform: (d) => {
-      d.x = new Date(parseInt(d.x));
-    },
-  });
-
-  const [
-    dailyTotalData,
-    dailyTotalArguments,
-    setDailyTotalArguments,
-    isDailyTotalLoading,
-  ] = useData({
-    request: getDailyTotal,
-    initialArguments: {
-      categoryId: "3",
-      categoryName: "exercises",
-      numMonths: "3",
-      type: "duration",
-    },
-    dataTransform: (d) => {
-      d.x = new Date(parseInt(d.x));
-    },
-  });
-
-  const setMonths = (numMonths) => {
-    setPainDayArguments({ numMonths });
-    setDailyTotalArguments({ numMonths });
-  };
+  console.log(topicIdx);
 
   return (
     <>
       <div className="topic-selector">
-        <h1 style={{ fontFamily: "Indie Flower" }}>Topic selector Holder</h1>
+        <button
+          onClick={() => {
+            setTopicIdx((topicIdx - 1 + topics.length) % topics.length);
+          }}
+        >{`<`}</button>
+        <h1 className="topic-text">{topics[topicIdx].name}</h1>
+        <button
+          onClick={() => {
+            setTopicIdx((topicIdx + 1) % topics.length);
+          }}
+        >{`>`}</button>
       </div>
-      {!isPainDayLoading && !isDailyTotalLoading ? (
-        <>
-          <TimeTrendChartMultiLines dataSet={[painDayData, dailyTotalData]} />
-          <div className="timeSpanButtons">
-            <button onClick={() => setMonths("0.25")}>1W</button>
-            <button onClick={() => setMonths("1")}>1M</button>
-            <button onClick={() => setMonths("3")}>3M</button>
-            <button onClick={() => setMonths("6")}>6M</button>
-            <button onClick={() => setMonths("12")}>1Y</button>
-          </div>
-        </>
-      ) : (
-        <h1>Loading ...</h1>
-      )}
+      {topics[topicIdx].render}
+      <div className="timeSpanButtons">
+        <button onClick={() => setMonths("0.25")}>1W</button>
+        <button onClick={() => setMonths("1")}>1M</button>
+        <button onClick={() => setMonths("3")}>3M</button>
+        <button onClick={() => setMonths("6")}>6M</button>
+        <button onClick={() => setMonths("12")}>1Y</button>
+      </div>
     </>
   );
 }

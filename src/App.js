@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
-import Report from "./components/Report";
+import Report, { useState } from "./components/Report";
 import Test from "./components/Test";
 
 function App() {

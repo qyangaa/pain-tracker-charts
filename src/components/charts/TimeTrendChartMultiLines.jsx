@@ -34,7 +34,7 @@ const style = {
   },
   axisBottom: {
     lineStroke: "#C0C0BB",
-    tickOffset: 8,
+    tickOffset: 20,
     text: {
       fill: "#635F5D",
       fontFamily: "Indie Flower",
@@ -154,9 +154,7 @@ export default function TimeTrendChart({ dataSet }) {
         curIdx++;
       }
     }
-    // console.log({ lines });
     if (lines.length === 0) {
-      console.log("here");
       return (
         <text style={{ fontSize: 30, fontFamily: "Indie Flower" }}>
           No data available

@@ -21,7 +21,7 @@ export default function Contribution({ months, setMonths }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selections, setSelections] = useState([]);
   const [onSelect, setOnSelect] = useState(() => {});
-  console.log(options);
+
   useEffect(async () => {
     try {
       const data = await getPieChartSelections();
@@ -40,7 +40,7 @@ export default function Contribution({ months, setMonths }) {
       optionId: 16,
       optionName: "better pain",
       numMonths: "3",
-      extension: "5",
+      extension: "1",
     },
     dataTransform: (d) => {},
   });

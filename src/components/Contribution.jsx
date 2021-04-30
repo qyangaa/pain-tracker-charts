@@ -64,7 +64,7 @@ export default function Contribution({ months, setMonths }) {
   const handleClickOption = () => {
     setSelections(options);
     setOnSelect(() => (d) => {
-      setDataArguments({ optiopnId: d.id, optionName: d.name });
+      setDataArguments({ optionId: d.id, optionName: d.name });
       setIsModalOpen(false);
     });
     setIsModalOpen(true);

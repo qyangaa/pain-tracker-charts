@@ -6,26 +6,19 @@ import _ from "lodash";
 export const setToken = (token) =>
   client.setHeader("authorization", `Bearer ${token}`);
 
-export const getPainDayData = async ({ numMonths }) => {
-  if (!numMonths) return;
+export const getLineChart = async ({ numMonths, type }) => {
+  if (!numMonths || !type) return;
   const variables = {
     numMonths,
+    type,
   };
-  const data = await client.request(queries.getPainDayData, variables);
-  return data.getPainDayData;
+  const data = await client.request(queries.getLineChart, variables);
+  return data.getLineChart;
 };
 
-export const getDailyTotal = async (variables) => {
-  // console.log({ variables });
-  if (
-    !variables.categoryId ||
-    !variables.categoryName ||
-    !variables.numMonths ||
-    !variables.type
-  )
-    return;
-  const data = await client.request(queries.getDailyTotal, variables);
-  return data.getDailyTotal;
+export const getLineChartSelections = async () => {
+  const data = await client.request(queries.getLineChartSelections);
+  return data.getLineChartSelections;
 };
 
 export const getContribution = async (variables) => {

@@ -1,8 +1,8 @@
 import { gql } from "graphql-request";
 
-export const getPainDayData = gql`
-  query getPainDayData($numMonths: String!) {
-    getPainDayData(numMonths: $numMonths) {
+export const getLineChart = gql`
+  query getLineChart($numMonths: String!, $type: String!) {
+    getLineChart(numMonths: $numMonths, type: $type) {
       title
       seriesData {
         xlabel
@@ -20,32 +20,11 @@ export const getPainDayData = gql`
   }
 `;
 
-export const getDailyTotal = gql`
-  query getDailyTotal(
-    $categoryId: String!
-    $categoryName: String!
-    $numMonths: String!
-    $type: String!
-  ) {
-    getDailyTotal(
-      categoryId: $categoryId
-      categoryName: $categoryName
-      numMonths: $numMonths
-      type: $type
-    ) {
-      title
-      seriesData {
-        xlabel
-        ylabel
-        xmin
-        xmax
-        ymin
-        ymax
-        data {
-          x
-          y
-        }
-      }
+export const getLineChartSelections = gql`
+  query getLineChartSelections {
+    getLineChartSelections {
+      id
+      name
     }
   }
 `;

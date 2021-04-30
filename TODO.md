@@ -1,2 +1,4 @@
-- line adder
+-
 - add unit to line data
+
+- constrain tooltip inside line plot

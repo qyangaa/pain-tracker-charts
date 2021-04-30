@@ -15,10 +15,8 @@ import AxisBottom from "../shapes/AxisBottom";
 import ColorLegend from "../shapes/ColorLegend";
 import _ from "lodash";
 
-const colors = ["#9ACFDD", "#6b8f67", "#F28A80", "#F2ADA7", "#D9BACE"];
-
 const style = {
-  margin: { top: 0.2, bottom: 0.1, left: 0.05, right: 0.05 },
+  margin: { top: 0.1, bottom: 0.1, left: 0.05, right: 0.05 },
   mark: {
     path: {
       stroke: "#9ACFDD",
@@ -64,7 +62,7 @@ const style = {
 const xtickFormat = timeFormat("%-m/%-d");
 const yFormat = (y) => y.toFixed(1);
 
-export default function TimeTrendChart({ dataSet }) {
+export default function TimeTrendChart({ dataSet, colors }) {
   const [clickedSeries, setClickedSeries] = useState(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -165,12 +163,12 @@ export default function TimeTrendChart({ dataSet }) {
     return (
       <>
         {lines}{" "}
-        <ColorLegend
+        {/* <ColorLegend
           legends={legends}
           width={width}
           clickedSeries={clickedSeries}
           onClick={setClickedSeries}
-        />
+        /> */}
       </>
     );
   };
@@ -181,7 +179,7 @@ export default function TimeTrendChart({ dataSet }) {
         className="chart-container"
         style={{
           width: "90%",
-          height: "80%",
+          height: "50%",
           margin: "0% 5% 0% 5%",
           // backgrundColor: "blue",
         }}

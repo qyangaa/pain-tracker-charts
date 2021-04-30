@@ -6,13 +6,13 @@ export default function ColorLegend({
   onClick = () => {},
   clickedSeries,
   style = {
-    right: 0.5,
-    top: 0,
-    tickSpacing: 25,
-    tickSize: 7,
+    right: 10,
+    top: 10,
+    tickSpacing: 50,
+    tickSize: 20,
     tickTextOffset: 15,
     fadeOpacity: 0.2,
-    text: { fontSize: 20, fontFamily: "Indie Flower" },
+    text: { fontSize: 30, fontFamily: "Indie Flower", fill: "white" },
   },
 }) {
   return (
@@ -20,9 +20,9 @@ export default function ColorLegend({
       {legends.map((legend, idx) => (
         <g
           key={idx}
-          transform={`translate(${width * (1 - style.right)}, ${
-            -style.top - (idx + 1) * style.tickSpacing
-          })`}
+          transform={`translate(${
+            width - idx * style.tickSpacing - style.right
+          }, ${-style.top})`}
           onMouseDown={() => {
             legend.text === clickedSeries
               ? onClick(null)
@@ -35,13 +35,16 @@ export default function ColorLegend({
           }
         >
           <circle fill={legend.color} r={style.tickSize} />
-          <text
-            dx={style.tickTextOffset}
-            dy="0.32em"
-            style={{ ...style.text, cursor: "default" }}
-          >
-            {legend.text}
-          </text>
+          {(!clickedSeries || legend.text === clickedSeries) && (
+            <text
+              dx={0}
+              dy="0.32em"
+              textAnchor="middle"
+              style={{ ...style.text, cursor: "default" }}
+            >
+              ✓
+            </text>
+          )}
         </g>
       ))}
     </>

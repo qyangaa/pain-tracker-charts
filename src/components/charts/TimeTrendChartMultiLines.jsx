@@ -163,12 +163,12 @@ export default function TimeTrendChart({ dataSet, colors }) {
     return (
       <>
         {lines}{" "}
-        {/* <ColorLegend
+        <ColorLegend
           legends={legends}
           width={width}
           clickedSeries={clickedSeries}
           onClick={setClickedSeries}
-        /> */}
+        />
       </>
     );
   };

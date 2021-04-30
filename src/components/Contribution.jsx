@@ -1,31 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { getContribution } from "../graphql/requests";
+import { getContribution, getPieChartSelections } from "../graphql/requests";
 import useData from "../hooks/useData";
 
 import PieChart from "./charts/PieChart";
 import Modal from "./common/Modal";
 
-const categories = [
+const initialCategories = [
   { id: "3", name: "exercises" },
   { id: "2", name: "mood" },
 ];
 
-const options = [
+const initialOptions = [
   { id: "16", name: "better pain" },
   { id: "17", name: "worse pain" },
 ];
 
 export default function Contribution({ months, setMonths }) {
+  const [categories, setCategories] = useState(initialCategories);
+  const [options, setOptions] = useState(initialOptions);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selections, setSelections] = useState([]);
   const [onSelect, setOnSelect] = useState(() => {});
+  console.log(options);
+  useEffect(async () => {
+    try {
+      const data = await getPieChartSelections();
+      setCategories(data.categories);
+      setOptions(data.options);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const [data, dataArguments, setDataArguments, isDataLoading] = useData({
     request: getContribution,
     initialArguments: {
-      categoryId: "3",
+      categoryId: 3,
       categoryName: "exercises",
-      optionId: "16",
+      optionId: 16,
       optionName: "better pain",
       numMonths: "3",
       extension: "5",

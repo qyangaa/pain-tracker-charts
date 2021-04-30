@@ -79,3 +79,18 @@ export const getContribution = gql`
     }
   }
 `;
+
+export const getPieChartSelections = gql`
+  query getPieChartSelections {
+    getPieChartSelections {
+      categories {
+        id
+        name
+      }
+      options {
+        id
+        name
+      }
+    }
+  }
+`;

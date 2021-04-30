@@ -38,6 +38,13 @@ export const getContribution = async (variables) => {
     !variables.extension
   )
     return;
+  variables.categoryId = variables.categoryId.toString();
+  variables.optionId = variables.optionId.toString();
   const data = await client.request(queries.getContribution, variables);
   return data.getContribution;
+};
+
+export const getPieChartSelections = async () => {
+  const data = await client.request(queries.getPieChartSelections);
+  return data.getPieChartSelections;
 };

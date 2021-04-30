@@ -60,7 +60,6 @@ const style = {
 };
 
 const xtickFormat = timeFormat("%-m/%-d");
-const yFormat = (y) => y.toFixed(1);
 
 export default function TimeTrendChart({ dataSet, colors }) {
   const [clickedSeries, setClickedSeries] = useState(null);
@@ -131,7 +130,7 @@ export default function TimeTrendChart({ dataSet, colors }) {
         xAccessor={(d) => d.x}
         yAccessor={(d) => d.y}
         style={markStyle}
-        tootipFormat={yFormat}
+        tootipFormat={(y) => `${y.toFixed(1)} ${series.yunit}`}
         tooltipStyle={tooltipStyle}
         displayCircle
         key={idx}

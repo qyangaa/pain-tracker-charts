@@ -3,15 +3,29 @@ import React, { useState, useEffect } from "react";
 export default function Circle({
   x,
   y,
+  yData,
   style,
+  xRange,
+  yRange,
   tooltipStyle,
   tootipFormat,
   clickable,
 }) {
   const [isActive, setIsActive] = useState(false);
 
+  const getTooltipCoord = () => {
+    let tooltipCoord = { x: x, y: y };
+    tooltipCoord.x = Math.min(tooltipCoord.x, xRange[1] - 75);
+    tooltipCoord.x = Math.max(tooltipCoord.x, xRange[0] + 75);
+    tooltipCoord.y = Math.min(tooltipCoord.y, yRange[0] - 25);
+    tooltipCoord.y = Math.max(tooltipCoord.y, yRange[1] + 25);
+    console.log({ x, y, tooltipCoord });
+    return tooltipCoord;
+  };
+
   useEffect(() => {
     let timeout;
+
     if (isActive) {
       timeout = setTimeout(() => {
         setIsActive(false);
@@ -26,16 +40,24 @@ export default function Circle({
     <>
       {isActive && (
         <>
-          <circle cx={x} cy={y - 50} r={style.circleRadius * 5} style={style} />
+          <rect
+            x={getTooltipCoord().x - 75}
+            y={getTooltipCoord().y - 50}
+            rx="20"
+            ry="20"
+            width={150}
+            height={50}
+            style={style}
+          />
           <text
-            x={x}
-            y={y - 50 + 8}
+            x={getTooltipCoord().x}
+            y={getTooltipCoord().y - 17.5}
             style={{
               ...tooltipStyle,
               textAnchor: "middle",
             }}
           >
-            {tootipFormat(x, y)}
+            {tootipFormat(yData)}
           </text>
         </>
       )}

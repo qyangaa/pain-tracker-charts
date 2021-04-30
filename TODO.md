@@ -1,3 +1,1 @@
--
-- add unit to line data
-- constrain tooltip inside line plot
+- change z index of line when not active

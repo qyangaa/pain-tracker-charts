@@ -7,6 +7,8 @@ export const getLineChart = gql`
       seriesData {
         xlabel
         ylabel
+        xunit
+        yunit
         xmin
         xmax
         ymin

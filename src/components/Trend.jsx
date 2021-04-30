@@ -74,6 +74,8 @@ export default function Trend({ months, setMonths }) {
     setIsModalOpen(true);
   };
 
+  console.log(firstData);
+
   return (
     <>
       <div className="contribution-selector">

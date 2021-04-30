@@ -36,7 +36,10 @@ export default function LineMarks({
               <Circle
                 x={xScale(xAccessor(d))}
                 y={yScale(yAccessor(d))}
+                yData={yAccessor(d)}
                 style={style.circle}
+                xRange={xScale.range()}
+                yRange={yScale.range()}
                 tooltipStyle={tooltipStyle}
                 tootipFormat={tootipFormat}
                 key={idx}

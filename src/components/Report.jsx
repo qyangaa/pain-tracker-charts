@@ -47,7 +47,7 @@ export default function Report({ match }) {
         >{`>`}</button>
       </div>
       {topics[topicIdx].render}
-      <div className="timeSpanButtons">
+      <div className="spanButtons">
         {monthsSelections.map((m, i) => (
           <button
             className={months === m.month ? "active" : ""}

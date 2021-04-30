@@ -39,7 +39,7 @@ button {
   text-align: center;
 }
 
-.timeSpanButtons {
+.spanButtons {
   bottom: 5%;
   position: absolute;
   width: 100%;
@@ -48,7 +48,7 @@ button {
   align-items: center;
 }
 
-.timeSpanButtons button {
+.spanButtons button {
   background-color: rgb(106, 112, 107);
   border-radius: 20px;
   width: 40px;
@@ -58,8 +58,8 @@ button {
   font-size: 1.3em;
 }
 
-.timeSpanButtons button.active {
-  border-color: rgb(106, 112, 107);
+.spanButtons button.active {
+  border-color: rgb(54, 90, 60);
   border-style: solid;
   border-width: 3px;
   border-radius: 25px;
@@ -108,14 +108,14 @@ button {
   align-items: center;
   justify-content: center;
   color: rgb(89, 165, 165);
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .contribution-selector button {
   background-color: rgb(89, 165, 165);
-  width: 40%;
-  height: 80px;
-  line-height: 1.1;
-  margin: 0px 20px;
-  font-size: 30px;
+  width: auto;
+  height: auto;
+  line-height: 1.2;
+  margin: 0px 10px;
+  font-size: 25px;
 }

@@ -15,12 +15,24 @@ const initialOptions = [
   { id: "17", name: "worse pain" },
 ];
 
+const extensions = [
+  { extension: `${1 / 30}`, name: "1 day" },
+  { extension: `${3 / 30}`, name: "3 days" },
+  { extension: `${7 / 30}`, name: "1 week" },
+  { extension: `${1}`, name: "1 month" },
+  { extension: `${3}`, name: "3 months" },
+];
+
 export default function Contribution({ months, setMonths }) {
   const [categories, setCategories] = useState(initialCategories);
   const [options, setOptions] = useState(initialOptions);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selections, setSelections] = useState([]);
   const [onSelect, setOnSelect] = useState(() => {});
+  const [extension, setExtension] = useState({
+    extension: `${1}`,
+    name: "1 month",
+  });
 
   useEffect(async () => {
     try {
@@ -40,14 +52,14 @@ export default function Contribution({ months, setMonths }) {
       optionId: 16,
       optionName: "better pain",
       numMonths: "3",
-      extension: "1",
+      extension: extension.extension,
     },
     dataTransform: (d) => {},
   });
 
   useEffect(() => {
     setDataArguments({ numMonths: months });
-  }, [months]);
+  }, [months, extension]);
 
   const handleClickCategory = () => {
     setSelections(categories);
@@ -70,9 +82,20 @@ export default function Contribution({ months, setMonths }) {
     setIsModalOpen(true);
   };
 
+  const handleClickExtension = () => {
+    setSelections(extensions);
+    setOnSelect(() => (d) => {
+      setDataArguments({ extension: d.extension });
+      setExtension(d);
+      setIsModalOpen(false);
+    });
+    setIsModalOpen(true);
+  };
   return (
     <>
       <div className="contribution-selector">
+        <button onClick={handleClickExtension}>{extension.name}</button>
+        <h3>of</h3>
         <button onClick={handleClickCategory}>
           {dataArguments.categoryName}
         </button>
@@ -84,6 +107,7 @@ export default function Contribution({ months, setMonths }) {
       ) : (
         <h1>Loading ...</h1>
       )}
+
       {isModalOpen && (
         <Modal
           selections={selections}

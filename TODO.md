@@ -1,3 +1,2 @@
 - line adder
-- pie plot
 - add unit to line data

@@ -1,2 +1,1 @@
-- update query according to new graphql schema
 - change z index of line when not active

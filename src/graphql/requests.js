@@ -21,7 +21,7 @@ export const getLineChartSelections = async () => {
   return data.getLineChartSelections;
 };
 
-export const getContribution = async (variables) => {
+export const getPieChart = async (variables) => {
   if (
     !variables.categoryId ||
     !variables.categoryName ||
@@ -31,10 +31,8 @@ export const getContribution = async (variables) => {
     !variables.extension
   )
     return;
-  variables.categoryId = variables.categoryId.toString();
-  variables.optionId = variables.optionId.toString();
-  const data = await client.request(queries.getContribution, variables);
-  return data.getContribution;
+  const data = await client.request(queries.getPieChart, variables);
+  return data.getPieChart;
 };
 
 export const getPieChartSelections = async () => {

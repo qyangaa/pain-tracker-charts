@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { getContribution, getPieChartSelections } from "../graphql/requests";
+import { getPieChart, getPieChartSelections } from "../graphql/requests";
 import useData from "../hooks/useData";
 
 import PieChart from "./charts/PieChart";
 import Modal from "./common/Modal";
 
 const initialCategories = [
-  { _id: "3", name: "exercises" },
-  { _id: "2", name: "mood" },
+  { _id: 3, name: "exercises" },
+  { _id: 2, name: "mood" },
 ];
 
 const initialOptions = [
-  { _id: "16", name: "better pain" },
-  { _id: "17", name: "worse pain" },
+  { _id: 16, name: "better pain" },
+  { _id: 17, name: "worse pain" },
 ];
 
 const extensions = [
@@ -45,7 +45,7 @@ export default function Contribution({ months, setMonths }) {
   }, []);
 
   const [data, dataArguments, setDataArguments, isDataLoading] = useData({
-    request: getContribution,
+    request: getPieChart,
     initialArguments: {
       categoryId: 3,
       categoryName: "exercises",

@@ -32,7 +32,7 @@ export default function Trend({ months, setMonths }) {
     isFirstLoading,
   ] = useData({
     request: getLineChart,
-    initialArguments: { numMonths: "1", type: "mood level" },
+    initialArguments: { numMonths: 1, type: "mood level" },
     dataTransform: (d) => {
       d.x = new Date(parseInt(d.x));
     },
@@ -45,7 +45,7 @@ export default function Trend({ months, setMonths }) {
     isSecondLoading,
   ] = useData({
     request: getLineChart,
-    initialArguments: { numMonths: "1", type: "exercise duration" },
+    initialArguments: { numMonths: 1, type: "exercise duration" },
     dataTransform: (d) => {
       d.x = new Date(parseInt(d.x));
     },

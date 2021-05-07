@@ -6,21 +6,21 @@ import PieChart from "./charts/PieChart";
 import Modal from "./common/Modal";
 
 const initialCategories = [
-  { id: "3", name: "exercises" },
-  { id: "2", name: "mood" },
+  { _id: "3", name: "exercises" },
+  { _id: "2", name: "mood" },
 ];
 
 const initialOptions = [
-  { id: "16", name: "better pain" },
-  { id: "17", name: "worse pain" },
+  { _id: "16", name: "better pain" },
+  { _id: "17", name: "worse pain" },
 ];
 
 const extensions = [
-  { extension: `${1 / 30}`, name: "1 day" },
-  { extension: `${3 / 30}`, name: "3 days" },
-  { extension: `${7 / 30}`, name: "1 week" },
-  { extension: `${1}`, name: "1 month" },
-  { extension: `${3}`, name: "3 months" },
+  { extension: 1 / 30, name: "1 day" },
+  { extension: 3 / 30, name: "3 days" },
+  { extension: 7 / 30, name: "1 week" },
+  { extension: 1, name: "1 month" },
+  { extension: 3, name: "3 months" },
 ];
 
 export default function Contribution({ months, setMonths }) {
@@ -30,7 +30,7 @@ export default function Contribution({ months, setMonths }) {
   const [selections, setSelections] = useState([]);
   const [onSelect, setOnSelect] = useState(() => {});
   const [extension, setExtension] = useState({
-    extension: `${1}`,
+    extension: 1,
     name: "1 month",
   });
 
@@ -51,7 +51,7 @@ export default function Contribution({ months, setMonths }) {
       categoryName: "exercises",
       optionId: 16,
       optionName: "better pain",
-      numMonths: "3",
+      numMonths: 3,
       extension: extension.extension,
     },
     dataTransform: (d) => {},
@@ -65,7 +65,7 @@ export default function Contribution({ months, setMonths }) {
     setSelections(categories);
     setOnSelect(() => (d) => {
       setDataArguments({
-        categoryId: d.id,
+        categoryId: d._id,
         categoryName: d.name,
       });
       setIsModalOpen(false);
@@ -76,7 +76,7 @@ export default function Contribution({ months, setMonths }) {
   const handleClickOption = () => {
     setSelections(options);
     setOnSelect(() => (d) => {
-      setDataArguments({ optionId: d.id, optionName: d.name });
+      setDataArguments({ optionId: d._id, optionName: d.name });
       setIsModalOpen(false);
     });
     setIsModalOpen(true);

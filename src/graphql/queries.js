@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
 export const getLineChart = gql`
-  query getLineChart($numMonths: String!, $type: String!) {
+  query getLineChart($numMonths: Int!, $type: String!) {
     getLineChart(numMonths: $numMonths, type: $type) {
       title
       seriesData {
@@ -25,7 +25,7 @@ export const getLineChart = gql`
 export const getLineChartSelections = gql`
   query getLineChartSelections {
     getLineChartSelections {
-      id
+      _id
       name
     }
   }
@@ -37,8 +37,8 @@ export const getContribution = gql`
     $categoryName: String!
     $optionId: String!
     $optionName: String!
-    $numMonths: String!
-    $extension: String!
+    $numMonths: Int!
+    $extension: Int!
   ) {
     getContribution(
       categoryId: $categoryId
@@ -65,11 +65,11 @@ export const getPieChartSelections = gql`
   query getPieChartSelections {
     getPieChartSelections {
       categories {
-        id
+        _id
         name
       }
       options {
-        id
+        _id
         name
       }
     }

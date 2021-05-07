@@ -4,16 +4,16 @@ import Trend from "./Trend";
 import Contribution from "./Contribution";
 
 const monthsSelections = [
-  { name: "1W", month: "0.25" },
-  { name: "1M", month: "1" },
-  { name: "3M", month: "3" },
-  { name: "6M", month: "6" },
-  { name: "1Y", month: "12" },
+  { name: "1W", month: 0.25 },
+  { name: "1M", month: 1 },
+  { name: "3M", month: 3 },
+  { name: "6M", month: 6 },
+  { name: "1Y", month: 12 },
 ];
 
 export default function Report({ match }) {
   const [topicIdx, setTopicIdx] = useState(0);
-  const [months, setMonths] = useState("3");
+  const [months, setMonths] = useState(3);
   const topics = [
     {
       name: "Trend",

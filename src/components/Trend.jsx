@@ -10,7 +10,7 @@ const initalColors = ["#9ACFDD", "#6b8f67"];
 const colors1 = ["#032F40", "#4F8C7B", "#36688B", "#229BA6"];
 const colors2 = ["#F27405", "#D95204", "#FF9A69", "#E86A5F"];
 
-export default function Trend({ months, setMonths }) {
+export default function Trend({ months }) {
   const [colors, setColors] = useState(initalColors);
   const [selections, setSelections] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,31 +25,23 @@ export default function Trend({ months, setMonths }) {
     }
   }, []);
 
-  const [
-    firstData,
-    firstArguments,
-    setFirstArguments,
-    isFirstLoading,
-  ] = useData({
-    request: getLineChart,
-    initialArguments: { numMonths: 1, type: "mood level" },
-    dataTransform: (d) => {
-      d.x = new Date(parseInt(d.x));
-    },
-  });
+  const [firstData, firstArguments, setFirstArguments, isFirstLoading] =
+    useData({
+      request: getLineChart,
+      initialArguments: { numMonths: 1, type: "mood level" },
+      dataTransform: (d) => {
+        d.x = new Date(parseInt(d.x));
+      },
+    });
 
-  const [
-    secondData,
-    secondArguments,
-    setSecondArguments,
-    isSecondLoading,
-  ] = useData({
-    request: getLineChart,
-    initialArguments: { numMonths: 1, type: "exercise duration" },
-    dataTransform: (d) => {
-      d.x = new Date(parseInt(d.x));
-    },
-  });
+  const [secondData, secondArguments, setSecondArguments, isSecondLoading] =
+    useData({
+      request: getLineChart,
+      initialArguments: { numMonths: 1, type: "exercise duration" },
+      dataTransform: (d) => {
+        d.x = new Date(parseInt(d.x));
+      },
+    });
 
   useEffect(() => {
     setFirstArguments({ numMonths: months });
@@ -73,8 +65,6 @@ export default function Trend({ months, setMonths }) {
     });
     setIsModalOpen(true);
   };
-
-  console.log(firstData);
 
   return (
     <>

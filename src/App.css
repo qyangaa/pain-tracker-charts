@@ -119,3 +119,11 @@ button {
   margin: 0px 10px;
   font-size: 25px;
 }
+
+.full-page {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

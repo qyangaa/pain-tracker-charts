@@ -23,7 +23,7 @@ const extensions = [
   { extension: 3, name: "3 months" },
 ];
 
-export default function Contribution({ months, setMonths }) {
+export default function Contribution({ months }) {
   const [categories, setCategories] = useState(initialCategories);
   const [options, setOptions] = useState(initialOptions);
   const [isModalOpen, setIsModalOpen] = useState(false);

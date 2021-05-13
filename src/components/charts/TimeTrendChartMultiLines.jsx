@@ -1,16 +1,7 @@
 import React, { useRef, useState, useEffect, useMemo } from "react";
-import {
-  csv,
-  scaleLinear,
-  max,
-  format,
-  extent,
-  scaleTime,
-  timeFormat,
-} from "d3";
+import { scaleLinear, extent, scaleTime, timeFormat } from "d3";
 
 import LineMarks from "../shapes/LineMarks";
-import AxisLeft from "../shapes/AxisLeft";
 import AxisBottom from "../shapes/AxisBottom";
 import ColorLegend from "../shapes/ColorLegend";
 import _ from "lodash";
@@ -74,9 +65,9 @@ export default function TimeTrendChart({ dataSet, colors }) {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const containerRef = useRef();
-
   useEffect(() => {
     const _containerWidth = containerRef.current.clientWidth;
+
     const _containerHeight = containerRef.current.clientHeight;
     const _margin = {
       left: containerWidth * style.margin.left,

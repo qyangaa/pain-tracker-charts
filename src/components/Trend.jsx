@@ -5,13 +5,10 @@ import useData from "../hooks/useData";
 
 import TimeTrendChartMultiLines from "./charts/TimeTrendChartMultiLines";
 import Modal from "./common/Modal";
-
-const initalColors = ["#9ACFDD", "#6b8f67"];
-const colors1 = ["#032F40", "#4F8C7B", "#36688B", "#229BA6"];
-const colors2 = ["#F27405", "#D95204", "#FF9A69", "#E86A5F"];
+import { lineColors1, lineColors2 } from "../assets/colors";
 
 export default function Trend({ months }) {
-  const [colors, setColors] = useState(initalColors);
+  const [colors, setColors] = useState([lineColors1[0], lineColors2[0]]);
   const [selections, setSelections] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [onSelect, setOnSelect] = useState(() => {});
@@ -50,17 +47,17 @@ export default function Trend({ months }) {
 
   useEffect(() => {
     const newColors = [];
-    newColors.push(_.sample(colors1));
-    newColors.push(_.sample(colors2));
+    newColors.push(_.sample(lineColors1));
+    newColors.push(_.sample(lineColors2));
     setColors(newColors);
   }, [firstArguments.type, secondArguments.type]);
 
   const handleClickSelection = (idx) => {
-    let setter;
-    if (idx === 1) setter = setFirstArguments;
-    if (idx === 2) setter = setSecondArguments;
+    let setArguments;
+    if (idx === 1) setArguments = setFirstArguments;
+    if (idx === 2) setArguments = setSecondArguments;
     setOnSelect(() => (d) => {
-      setter({ type: d.name });
+      setArguments({ type: d.name });
       setIsModalOpen(false);
     });
     setIsModalOpen(true);

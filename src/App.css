@@ -120,6 +120,15 @@ button {
   font-size: 25px;
 }
 
+.modal-selector button {
+  background-color: rgb(89, 165, 165);
+  width: auto;
+  height: auto;
+  line-height: 1.2;
+  margin: 0px 10px;
+  font-size: 25px;
+}
+
 .full-page {
   height: 80%;
   width: 100%;

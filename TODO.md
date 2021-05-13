@@ -1,1 +1,2 @@
 - change z index of line when not active
+- make svg responsive to window size change

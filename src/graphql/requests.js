@@ -1,4 +1,3 @@
-import { request } from "graphql-request";
 import * as queries from "./queries";
 import { client } from "./graphqlConfig";
 import _ from "lodash";

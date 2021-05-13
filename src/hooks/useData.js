@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { csv, json } from "d3";
 
 export default function useData({
   request = async () => {},

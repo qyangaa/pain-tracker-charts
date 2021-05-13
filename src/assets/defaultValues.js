@@ -17,6 +17,6 @@ export const initialCategories = [
 ];
 
 export const initialOptions = [
-  { _id: 16, name: "better pain" },
+  { _id: 16, name: "less pain" },
   { _id: 17, name: "worse pain" },
 ];

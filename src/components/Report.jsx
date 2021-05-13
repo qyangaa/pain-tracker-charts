@@ -3,6 +3,7 @@ import { setToken } from "../graphql/requests";
 import Trend from "./Trend";
 import Contribution from "./Contribution";
 import MonthSelector from "./common/MonthSelector";
+import useIndex from "../hooks/useIndex";
 
 const defaultMonthsSelections = [
   { name: "1W", month: 0.25 },
@@ -16,7 +17,6 @@ export default function Report({
   match,
   monthsSelections = defaultMonthsSelections,
 }) {
-  const [topicIdx, setTopicIdx] = useState(0);
   const [months, setMonths] = useState(3);
   const topics = [
     {
@@ -36,25 +36,18 @@ export default function Report({
       ),
     },
   ];
+  const [topicIdx, nextIdx, prevIdx] = useIndex({ length: topics.length });
 
   useEffect(() => {
     setToken(match.params.token);
-  }, []);
-
-  const handlePrevTopic = useCallback(() => {
-    setTopicIdx((topicIdx - 1 + topics.length) % topics.length);
-  }, [topicIdx]);
-
-  const handleNextTopic = useCallback(() => {
-    setTopicIdx((topicIdx + 1) % topics.length);
-  }, [topicIdx]);
+  }, [match.params.token]);
 
   return (
     <>
       <div className="topic-selector">
-        <button onClick={handlePrevTopic}>{`<`}</button>
+        <button onClick={nextIdx}>{`<`}</button>
         <h1 className="topic-text">{topics[topicIdx].name}</h1>
-        <button onClick={handleNextTopic}>{`>`}</button>
+        <button onClick={prevIdx}>{`>`}</button>
       </div>
       {topics[topicIdx].render}
       <MonthSelector

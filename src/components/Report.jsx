@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { setToken } from "../graphql/requests";
 import Trend from "./Trend";
 import Contribution from "./Contribution";
+import Test from "./Test";
 import MonthSelector from "./common/MonthSelector";
 import useIndex from "../hooks/useIndex";
 
@@ -19,6 +20,10 @@ export default function Report({
 }) {
   const [months, setMonths] = useState(3);
   const topics = [
+    {
+      name: "Test",
+      render: <Test months={months} />,
+    },
     {
       name: "Trend",
       render: <Trend months={months} />,

@@ -3,6 +3,7 @@ import _ from "lodash";
 import { getLineChart, getLineChartSelections } from "../graphql/requests";
 import useData from "../hooks/useData";
 
+import { ChartContainer } from "./common/ChartContainer";
 import TimeTrendChartMultiLines from "./charts/TimeTrendChartMultiLines";
 import ModalSelectButton from "./common/ModalSelectButton";
 import { lineColors1, lineColors2 } from "../assets/colors";
@@ -68,10 +69,12 @@ export default function Trend({ months }) {
         />
       </div>
       {!isFirstLoading && !isSecondLoading ? (
-        <TimeTrendChartMultiLines
-          dataSet={[firstData, secondData]}
-          colors={colors}
-        />
+        <ChartContainer>
+          <TimeTrendChartMultiLines
+            dataSet={[firstData, secondData]}
+            colors={colors}
+          />
+        </ChartContainer>
       ) : (
         <h1>Loading ...</h1>
       )}

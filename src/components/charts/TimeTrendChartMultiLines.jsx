@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect, useMemo } from "react";
+import React, { useRef, useState, useEffect, useMemo, useContext } from "react";
 import { scaleLinear, extent, scaleTime, timeFormat } from "d3";
 
+import { ContainerContext } from "../common/ChartContainer";
 import LineMarks from "../shapes/LineMarks";
 import AxisBottom from "../shapes/AxisBottom";
 import ColorLegend from "../shapes/ColorLegend";
@@ -12,6 +13,8 @@ const xtickFormat = timeFormat("%-m/%-d");
 
 export default function TimeTrendChart({ dataSet, colors }) {
   const [clickedSeries, setClickedSeries] = useState(null);
+  // const { containerWidth, containerHeight, width, height, margin } =
+  //   useContext(ContainerContext);
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
   const [margin, setMargin] = useState({

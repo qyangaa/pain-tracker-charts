@@ -21,10 +21,6 @@ export default function Report({
   const [months, setMonths] = useState(3);
   const topics = [
     {
-      name: "Test",
-      render: <Test months={months} />,
-    },
-    {
       name: "Trend",
       render: <Trend months={months} />,
     },

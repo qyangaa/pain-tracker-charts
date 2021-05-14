@@ -4,14 +4,12 @@ import { getLineChart, getLineChartSelections } from "../graphql/requests";
 import useData from "../hooks/useData";
 
 import TimeTrendChartMultiLines from "./charts/TimeTrendChartMultiLines";
-import Modal from "./common/Modal";
+import ModalSelectButton from "./common/ModalSelectButton";
 import { lineColors1, lineColors2 } from "../assets/colors";
 
 export default function Trend({ months }) {
   const [colors, setColors] = useState([lineColors1[0], lineColors2[0]]);
   const [selections, setSelections] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [onSelect, setOnSelect] = useState(() => {});
 
   useEffect(async () => {
     try {
@@ -52,33 +50,22 @@ export default function Trend({ months }) {
     setColors(newColors);
   }, [firstArguments.type, secondArguments.type]);
 
-  const handleClickSelection = (idx) => {
-    let setArguments;
-    if (idx === 1) setArguments = setFirstArguments;
-    if (idx === 2) setArguments = setSecondArguments;
-    setOnSelect(() => (d) => {
-      setArguments({ type: d.name });
-      setIsModalOpen(false);
-    });
-    setIsModalOpen(true);
-  };
-
   return (
     <>
       <div className="contribution-selector">
-        <button
-          onClick={() => handleClickSelection(1)}
-          style={{ backgroundColor: colors[0] }}
-        >
-          {firstArguments.type}
-        </button>
+        <ModalSelectButton
+          initialSelection={{ name: firstArguments.type }}
+          options={selections}
+          onSelectOption={(d) => setFirstArguments({ type: d.name })}
+          color={colors[0]}
+        />
         <h3> vs </h3>
-        <button
-          onClick={() => handleClickSelection(2)}
-          style={{ backgroundColor: colors[1] }}
-        >
-          {secondArguments.type}
-        </button>
+        <ModalSelectButton
+          initialSelection={{ name: secondArguments.type }}
+          options={selections}
+          onSelectOption={(d) => setSecondArguments({ type: d.name })}
+          color={colors[1]}
+        />
       </div>
       {!isFirstLoading && !isSecondLoading ? (
         <TimeTrendChartMultiLines
@@ -87,14 +74,6 @@ export default function Trend({ months }) {
         />
       ) : (
         <h1>Loading ...</h1>
-      )}
-
-      {isModalOpen && (
-        <Modal
-          selections={selections}
-          onSelect={onSelect}
-          onClose={() => setIsModalOpen(false)}
-        />
       )}
     </>
   );

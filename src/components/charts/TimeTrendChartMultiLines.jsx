@@ -6,49 +6,7 @@ import AxisBottom from "../shapes/AxisBottom";
 import ColorLegend from "../shapes/ColorLegend";
 import _ from "lodash";
 
-const style = {
-  margin: { top: 0.1, bottom: 0.1, left: 0.05, right: 0.05 },
-  mark: {
-    path: {
-      stroke: "#9ACFDD",
-      strokeWidth: 5,
-      strokeLinejoin: "round",
-      strokeLinecap: "round",
-    },
-
-    circle: {
-      fill: "#9ACFDD99",
-      circleRadius: 9,
-    },
-  },
-  axisBottom: {
-    lineStroke: "#C0C0BB",
-    tickOffset: 20,
-    text: {
-      fill: "#635F5D",
-      fontFamily: "Indie Flower",
-      fontSize: "20",
-    },
-  },
-  axisLeft: {
-    lineStroke: "#C0C0BB",
-    tickOffset: -10,
-    text: {
-      fill: "#635F5D",
-      fontFamily: "Indie Flower",
-    },
-  },
-  xlabel: {
-    fontSize: "1.5em",
-    fill: "#635F5D",
-  },
-  tooltipStyle: {
-    fontSize: "2em",
-    fontWeight: "bold",
-    fill: "#FFF",
-    fontFamily: "Indie Flower",
-  },
-};
+import { timeTrendChartStyle as style } from "../../assets/styles";
 
 const xtickFormat = timeFormat("%-m/%-d");
 
@@ -65,6 +23,7 @@ export default function TimeTrendChart({ dataSet, colors }) {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const containerRef = useRef();
+
   useEffect(() => {
     const _containerWidth = containerRef.current.clientWidth;
 
@@ -171,7 +130,6 @@ export default function TimeTrendChart({ dataSet, colors }) {
           width: "90%",
           height: "50%",
           margin: "0% 5% 0% 5%",
-          // backgrundColor: "blue",
         }}
         ref={containerRef}
       >

@@ -4,6 +4,7 @@ import Modal from "./Modal";
 export default function ModalSelectButton({
   initialSelection = {},
   options,
+  color = "rgb(31, 119, 180)",
   onSelectOption = () => {},
   nameAccessor = (d) => d.name,
 }) {
@@ -22,7 +23,9 @@ export default function ModalSelectButton({
   };
   return (
     <div className="modal-selector">
-      <button onClick={handleClick}>{nameAccessor(selection)}</button>
+      <button onClick={handleClick} style={{ backgroundColor: color }}>
+        {nameAccessor(selection)}
+      </button>
       {isModalOpen && (
         <Modal
           selections={selections}

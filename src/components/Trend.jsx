@@ -53,6 +53,16 @@ export default function Trend({ months }) {
 
   return (
     <>
+      {!isFirstLoading && !isSecondLoading ? (
+        <ChartContainer>
+          <TimeTrendChartMultiLines
+            dataSet={[firstData, secondData]}
+            colors={colors}
+          />
+        </ChartContainer>
+      ) : (
+        <h1>Loading ...</h1>
+      )}
       <div className="contribution-selector">
         <ModalSelectButton
           initialSelection={{ name: firstArguments.type }}
@@ -68,16 +78,6 @@ export default function Trend({ months }) {
           color={colors[1]}
         />
       </div>
-      {!isFirstLoading && !isSecondLoading ? (
-        <ChartContainer>
-          <TimeTrendChartMultiLines
-            dataSet={[firstData, secondData]}
-            colors={colors}
-          />
-        </ChartContainer>
-      ) : (
-        <h1>Loading ...</h1>
-      )}
     </>
   );
 }

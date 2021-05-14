@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getPieChart, getPieChartSelections } from "../graphql/requests";
 import useData from "../hooks/useData";
 
+import { ChartContainer } from "./common/ChartContainer";
 import PieChart from "./charts/PieChart";
 import ModalSelectButton from "./common/ModalSelectButton";
 import {
@@ -45,7 +46,9 @@ export default function Contribution({ months }) {
   return (
     <>
       {!isDataLoading ? (
-        <PieChart data={data.seriesData[0]} title={data.title} />
+        <ChartContainer>
+          <PieChart data={data.seriesData[0]} title={data.title} />
+        </ChartContainer>
       ) : (
         <h1>Loading ...</h1>
       )}

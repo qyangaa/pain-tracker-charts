@@ -46,8 +46,10 @@ export function ChartContainer(props) {
         className="chart-container"
         style={{
           width: "90%",
-          height: "50%",
-          margin: "0% 5% 0% 5%",
+          height: "60%",
+          margin: "auto 5% 0% 5%",
+          position: "absolute",
+          bottom: "15%",
         }}
         ref={containerRef}
       >
